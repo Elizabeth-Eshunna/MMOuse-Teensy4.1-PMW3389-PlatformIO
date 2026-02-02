@@ -23,8 +23,10 @@ Work In Progress
 #include <Arduino.h>
 #include "teensy4_mouse.h"
 #include "srom_3389.h"
+#include "more_buttons.h"
 #include <SPI.h>
 #include <Adafruit_MCP23X17.h>
+
 
 // PMW3360 datasheet mentions a max of 2MHz for the SPI clock however up to 36Mhz seems to work fine for me
 // Very small benefit increasing this speed beyond 2MHz to decrease transaction times sensor FPS is still limited to 12000 FPS
@@ -102,7 +104,7 @@ Adafruit_MCP23X17 mcp1;
 Adafruit_MCP23X17 mcp2;
 static bool g_shift_active = false; // Tracks the state of our G-Shift modifier key
 
-// Writes to a register on the PMW3360
+// Writes to a register on the PMW3389
 void write_reg_PMW(uint8_t reg, uint8_t value)
 {
   reg               |= 0b10000000;
@@ -115,7 +117,7 @@ void write_reg_PMW(uint8_t reg, uint8_t value)
   delayMicroseconds(TSWW);
 }
 
-// Reads out a register on the PMW3360
+// Reads out a register on the PMW3389
 uint8_t read_reg_PMW(uint8_t reg)
 {
   reg &= 0b01111111;
@@ -138,7 +140,7 @@ void upload_byte(uint8_t value)
   delayMicroseconds(TLOAD);
 }
 
-// Uploads a binary firmware file over SPI to the PMW3360
+// Uploads a binary firmware file over SPI to the PMW3389
 void upload_firmware()
 {
   // Prepare to upload the binary file
@@ -157,7 +159,7 @@ void upload_firmware()
   write_reg_PMW(REG_Config2, 0x00);
 }
 
-// Initializes the PMW3360
+// Initializes the PMW3389
 uint32_t begin_PMW()
 {
   pinMode(PMW_CS   , OUTPUT);
@@ -188,10 +190,10 @@ uint32_t check_signature()
 
   SPI.endTransaction();
 
-  return (pid == 0x47 && iv_pid == 0xB8 && SROM_ver == 0xE8); // signature for SROM 0x04
+  return (pid == 0x47 && iv_pid == 0xB8 && SROM_ver == 0xE8); // signature for PMW33389
 }
 
-// Sets the CPI/DPI value of the PMW3360
+// Sets the CPI/DPI value of the PMW3389
 void set_CPI(uint16_t cpi)
 {
   // Limits cpi to 100 - 12000 effectivly with steps of a 100
