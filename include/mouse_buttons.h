@@ -1,3 +1,19 @@
+#define MS_0       29
+#define MS_1       30
+#define MC_NO      14
+#define MC_NC      15
+
+#define M1_NO      33
+#define M1_NC      34
+#define M2_NO      35
+#define M2_NC      36
+#define M3_NO      37
+#define M3_NC      38
+#define M4_NO      39
+#define M4_NC      40
+#define M5_NO      31
+#define M5_NC      32
+
 
 #define FAR_EDGE              0
 #define NEAR_EDGE             1

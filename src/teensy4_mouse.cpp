@@ -20,12 +20,18 @@ Work In Progress
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+
 #include <Arduino.h>
-#include "teensy4_mouse.h"
-#include "srom_3389.h"
-#include "more_buttons.h"
 #include <SPI.h>
+#include <Wire.h>
+
 #include <Adafruit_MCP23X17.h>
+#include <Adafruit_BNO08x.h>
+
+#include "BNO085_IMU.h"
+#include "PMW_3389_sensor.h"
+#include "srom_3389.h"
+#include "mouse_buttons.h"
 
 
 // PMW3360 datasheet mentions a max of 2MHz for the SPI clock however up to 36Mhz seems to work fine for me
