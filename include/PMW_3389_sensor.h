@@ -65,6 +65,17 @@
 #define TSRR                           20
 #define TLOAD                          15
 
+// SPI and timing settings used by PMW3389 implementation
+#define SPI_BUS_SPEED     2000000
+#define SPI_SETTINGS_PMW  SPISettings      (SPI_BUS_SPEED, MSBFIRST, SPI_MODE3)
+#define ACTIVATE_CS_PMW   digitalWriteFast (PMW_CS,        LOW); delayMicroseconds(1)
+#define DEACTIVATE_CS_PMW delayMicroseconds(1);                  digitalWriteFast (PMW_CS, HIGH)
+#define RESET_PMW         digitalWriteFast (PMW_RESET,     LOW); delayMicroseconds(1); digitalWriteFast(PMW_RESET, HIGH); delayMicroseconds(1)
+#define RESET_SPI         digitalWriteFast (PMW_CS,        LOW); delayMicroseconds(1); digitalWriteFast(PMW_CS,    HIGH); delayMicroseconds(1)
+
+// Burst read timing estimate used by main loop
+#define BURST_READ_TIME (TSRAD_MOTION_BURST + 5) + 8 * (1000000.0 / (SPI_BUS_SPEED)) * (12 + 1)
+
 void     write_reg_PMW(uint8_t reg, uint8_t value);
 uint8_t  read_reg_PMW(uint8_t reg);
 void     upload_byte(uint8_t value);

@@ -82,3 +82,13 @@
             //#define BUTTONb15 31
 
 extern const char* const buttonNames[32];
+#pragma once
+
+#include <Arduino.h>
+
+void mcp_init();
+void update_mcp_buttons();
+bool mcp_get_g_shift_active();
+
+// Button name array defined in src/mcp_buttons.cpp
+extern const char* const buttonNames[32];
