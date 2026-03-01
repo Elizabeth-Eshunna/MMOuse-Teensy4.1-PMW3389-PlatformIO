@@ -35,10 +35,7 @@ Work In Progress
 
 
 // PMW SPI settings and timing are defined in include/PMW_3389_sensor.h
-
-
 // Button names are defined in src/mcp_buttons.cpp
-
 
 
 static elapsedMicros burst_timer  = 0;
@@ -62,8 +59,10 @@ static uint16_t set_rate                = 125;
 // Note: polling rate can be "properly" limited by setting a divider (8000 / divider = polling rate or 1000 / divider = polling rate depending on interface)
 // This divider can be set in the teensy core files but not sure yet if you can adjust it somewhere during runtime (usb_desc.h -> MOUSE_INTERVAL)
 
+
 // MCP button handling moved to include/mcp_buttons.h / src/mcp_buttons.cpp
 // PMW3389 low-level implementations moved to src/PMW_3389_sensor.cpp
+
 
 /*
   Burst report according to PMW3360 datasheet
@@ -177,9 +176,6 @@ void update_usb()
   x = 0;
   y = 0;
 }
-
-
-
 
 
 // Sets up all the buttons and the sensor

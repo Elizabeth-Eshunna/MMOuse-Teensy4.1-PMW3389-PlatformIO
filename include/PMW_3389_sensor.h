@@ -1,3 +1,5 @@
+#include <cstdint>
+
 //Mouse Inputs
 #define PMW_CS     10
 #define PMW_MOSI   11
